@@ -1,0 +1,33 @@
+Issues:
+    Fix: 
+        "format": "2d_vietsub",
+                        "times": [
+                            {
+                                "schedule_id": "sch02",
+                                "start": "21:00",
+                                "end": "23:00"
+                            }
+                        ]
+    To:
+        "format": "2d_vietsub",
+                        "times": [
+                            {
+                                "schedule_id": "sch02",
+                                "schedulestart": "21:00",
+                                "schedule_end": "23:00"
+                            }
+                        ]
+
+
+    Fix:
+            "movie_id": "fam01",
+            "movie_name": "Nữ hoàng băng giá 2019 (Phần 2)",
+
+    To:
+        "movie":{
+            "movie_id": "fam01",
+            "movie_name": "Nữ hoàng băng giá 2019 (Phần 2)",
+        }
+
+Sloved:
+    - How to set height of Contaner() inside Expanded() inside Column(): Wrap it with Align()

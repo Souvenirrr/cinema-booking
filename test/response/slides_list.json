@@ -1,0 +1,26 @@
+{
+    "status": "success",
+    "msg": "done",
+    "slides":[
+       {
+        "slides_img_url": "https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/f/r/frozen2_sneakshow_980x448px.jpg",
+        "direct_to_url": "#",
+        "type": "img"
+       },
+       {
+        "slides_img_url": "https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/r/e/redsun-coke-cgv-984x448_3.png",
+        "direct_to_url": "#",
+        "type": "img"
+       },
+       {
+        "slides_img_url": "https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448-zalopay-cgv79k.jpg",
+        "direct_to_url": "#",
+        "type": "img"
+       },
+       {
+        "slides_img_url": "https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/r/o/rolling_banner_1119.jpg",
+        "direct_to_url": "#",
+        "type": "img"
+       }
+    ]
+}

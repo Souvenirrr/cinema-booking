@@ -1,0 +1,56 @@
+{
+    "status": "success",
+    "msg": "done",
+    "movie_id": "fam01",
+    "movie_name": "Nữ hoàng băng giá 2019 (Phần 2)",
+    "date": "25/11/2019",
+    "addresses": [
+        {
+            "address_id": "pl01",
+            "address_name": "Vincom Timecity",
+            "formats": [
+                {
+                    "format": "2d_vietsub",
+                    "times": [
+                        {
+                            "schedule_id": "sch02",
+                            "start": "21:00",
+                            "end": "23:00"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "address_id": "pl02",
+            "address_name": "Vincom Cầu giấy",
+            "formats": [
+                {
+                    "format": "2d vietsub",
+                    "times": [
+                        {
+                            "schedule_id": "sch03",
+                            "start": "21:00",
+                            "end": "23:00"
+                        }
+                    ]
+                },
+                {
+                    "format": "3d",
+                    "times": [
+                        {
+                            "schedule_id": "sch04",
+                            "start": "21:00",
+                            "end": "23:00"
+                        },
+                        {
+                            "schedule_id": "sch05",
+                            "start": "22:00",
+                            "end": "0:00"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,391 @@
+{
+    "status": "success",
+    "msg": "done",
+    "movie": {
+        "movie_id": "fam01",
+        "movie_name": "Nữ hoàng băng giá 2019 (Phần 2)"
+    },
+    "schedule": {
+        "schedule_id": "sch01",
+        "schedule_date": "25/11/2019",
+        "schedule_start": "21:00",
+        "schedule_end": "23:00"
+    },
+    "seat_rows": [
+        {
+            "row": "A",
+            "seats": [
+                {
+                    "seat_id": "s_01",
+                    "seat_type": 0,
+                    "number": 1,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_02",
+                    "seat_type": 0,
+                    "number": 2,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_03",
+                    "seat_type": 0,
+                    "number": 3,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_04",
+                    "seat_type": 0,
+                    "number": 4,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_05",
+                    "seat_type": 0,
+                    "number": 5,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_06",
+                    "seat_type": 0,
+                    "number": 6,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_07",
+                    "seat_type": 0,
+                    "number": 7,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_08",
+                    "seat_type": 0,
+                    "number": 8,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_09",
+                    "seat_type": 0,
+                    "number": 9,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_10",
+                    "seat_type": 0,
+                    "number": 10,
+                    "seat_status": true,
+                    "price": 80000
+                }
+            ]
+        },
+        {
+            "row": "B",
+            "seats": [
+                {
+                    "seat_id": "s_11",
+                    "seat_type": 0,
+                    "number": 1,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_12",
+                    "seat_type": 0,
+                    "number": 2,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_13",
+                    "seat_type": 0,
+                    "number": 3,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_14",
+                    "seat_type": 0,
+                    "number": 4,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_15",
+                    "seat_type": 0,
+                    "number": 5,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_16",
+                    "seat_type": 0,
+                    "number": 6,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_17",
+                    "seat_type": 0,
+                    "number": 7,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_18",
+                    "seat_type": 0,
+                    "number": 8,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_19",
+                    "seat_type": 0,
+                    "number": 9,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_20",
+                    "seat_type": 0,
+                    "number": 10,
+                    "seat_status": true,
+                    "price": 80000
+                }
+            ]
+        },
+        {
+            "row": "C",
+            "seats": [
+                {
+                    "seat_id": "s_21",
+                    "seat_type": 0,
+                    "number": 1,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_22",
+                    "seat_type": 0,
+                    "number": 2,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_23",
+                    "seat_type": 0,
+                    "number": 3,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_01",
+                    "seat_type": 0,
+                    "number": 4,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_24",
+                    "seat_type": 0,
+                    "number": 5,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_25",
+                    "seat_type": 0,
+                    "number": 6,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_26",
+                    "seat_type": 0,
+                    "number": 7,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_27",
+                    "seat_type": 0,
+                    "number": 8,
+                    "seat_status": false,
+                    "price": 80000
+                }
+            ]
+        },
+        {
+            "row": "D",
+            "seats": [
+                {
+                    "seat_id": "s_30",
+                    "seat_type": 0,
+                    "number": 1,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_31",
+                    "seat_type": 0,
+                    "number": 2,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_32",
+                    "seat_type": 0,
+                    "number": 3,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_33",
+                    "seat_type": 0,
+                    "number": 4,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_34",
+                    "seat_type": 0,
+                    "number": 5,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_35",
+                    "seat_type": 0,
+                    "number": 6,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_36",
+                    "seat_type": 0,
+                    "number": 7,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_37",
+                    "seat_type": 0,
+                    "number": 8,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_38",
+                    "seat_type": 0,
+                    "number": 9,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_39",
+                    "seat_type": 0,
+                    "number": 10,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_40",
+                    "seat_type": 0,
+                    "number": 11,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_41",
+                    "seat_type": 0,
+                    "number": 12,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_42",
+                    "seat_type": 0,
+                    "number": 13,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_43",
+                    "seat_type": 0,
+                    "number": 14,
+                    "seat_status": false,
+                    "price": 80000
+                }
+            ]
+        },
+        {
+            "row": "E",
+            "seats": [
+                {
+                    "seat_id": "s_44",
+                    "seat_type": 0,
+                    "number": 1,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_45",
+                    "seat_type": 0,
+                    "number": 2,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_46",
+                    "seat_type": 0,
+                    "number": 3,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_47",
+                    "seat_type": 0,
+                    "number": 4,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_48",
+                    "seat_type": 0,
+                    "number": 5,
+                    "seat_status": true,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_49",
+                    "seat_type": 0,
+                    "number": 6,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_50",
+                    "seat_type": 0,
+                    "number": 7,
+                    "seat_status": false,
+                    "price": 80000
+                },
+                {
+                    "seat_id": "s_51",
+                    "seat_type": 0,
+                    "number": 8,
+                    "seat_status": false,
+                    "price": 80000
+                }
+            ]
+        }
+    ]
+}
