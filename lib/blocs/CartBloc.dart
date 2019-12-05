@@ -28,7 +28,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield CartLoaded(
           selectedSeats: event.selectedSeats,
           totalPriceWithPoint: totalPriceWithPoint,
-          totalPriceWithoutPoint: totalPriceWithoutPoint);
+          totalPriceWithoutPoint: totalPriceWithoutPoint,
+          point: event.point);
     }
   }
 }
