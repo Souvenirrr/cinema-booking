@@ -9,5 +9,6 @@ class CartLoaded extends CartState {
   final Map<String, Seats> selectedSeats;
   final double totalPriceWithoutPoint;
   final double totalPriceWithPoint;
-  CartLoaded({@required this.selectedSeats, @required this.totalPriceWithoutPoint, @required this.totalPriceWithPoint});
+  final double point;
+  CartLoaded({@required this.selectedSeats, @required this.totalPriceWithoutPoint, @required this.totalPriceWithPoint, @required this.point});
 }
