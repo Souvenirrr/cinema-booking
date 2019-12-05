@@ -23,7 +23,8 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
       yield WalletLoaded(wallet: wallet);
     }
     if (event is PayButtonPressed) {
-      yield PayLoad(point: event.point, selectedSeats: event.selectedSeats);
+      print(event.point);
+      print(event.selectedSeats.keys.length);
     }
   }
 }
