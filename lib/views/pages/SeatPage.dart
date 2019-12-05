@@ -293,9 +293,10 @@ class _PayableState extends State<Payable> {
                 payState.selectedSeats.keys.length,
                 payState.totalPriceWithPoint,
                 payState.totalPriceWithoutPoint,
-                wallet);
+                wallet,
+                payState.point);
           }
-          return _money(null, 0, 0, 0, wallet);
+          return _money(null, 0, 0, 0, wallet, 0);
         },
       ),
     );
@@ -306,7 +307,8 @@ class _PayableState extends State<Payable> {
       int seatLength,
       double totalPriceWithPoint,
       double totalPriceWithoutPoint,
-      AccountModel wallet) {
+      AccountModel wallet,
+      double point) {
     return Container(
       child: Row(
         children: <Widget>[
@@ -314,7 +316,11 @@ class _PayableState extends State<Payable> {
               flex: 3,
               child: _cartMoney(selectedSeats, seatLength, totalPriceWithPoint,
                   totalPriceWithoutPoint, wallet)),
-          Expanded(flex: 1, child: _walletMoney(wallet))
+          Expanded(
+              flex: 1,
+              child: _walletMoney(
+                wallet,
+              ))
         ],
       ),
     );
@@ -531,7 +537,11 @@ class _PayableState extends State<Payable> {
         elevation: 0,
         onPressed: () {
           print('wallet ');
-          print(_cartBloc.state);
+          final state = _cartBloc.state;
+          if (state is CartLoaded) {
+            _walletBloc.add(PayButtonPressed(
+                selectedSeats: state.selectedSeats, point: _pointUsed));
+          }
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -545,137 +555,5 @@ class _PayableState extends State<Payable> {
         ),
       ),
     );
-  }
-
-  _showDialog(DialogType dialogType, args) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          if (dialogType == DialogType.confirm) return _confirm(args);
-          if (dialogType == DialogType.success) return _success(args);
-          if (dialogType == DialogType.loading) return _loading(args);
-        });
-  }
-
-  AlertDialog _confirm(args) {
-    return AlertDialog(
-      title: Text(args['title']),
-      content: Text(args['content']),
-      backgroundColor: AppTheme.onBackground,
-      actions: <Widget>[
-        // Cancel
-        FlatButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(args['action_1']),
-        ),
-        // Accept
-        FlatButton(
-          onPressed: () {
-            Navigator.pop(context);
-            _showDialog(DialogType.loading, {'title': AppString.vuilongdoi});
-          },
-          child: Text(args['action_2']),
-        )
-      ],
-    );
-  }
-
-  Widget _success(args) {
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: Container(
-            width: (_width / 100) * 80,
-            height: (_height / 100) * 30,
-            decoration: BoxDecoration(
-                color: AppTheme.onBackground,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Icon(
-                    Icons.done,
-                    size: (_width / 100) * 20,
-                    color: Colors.green,
-                  ),
-                  Text(
-                    args['title'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.green),
-                  ),
-                  _homeButton()
-                ],
-              ),
-            ),
-          ),
-        ));
-  }
-
-  Align _homeButton() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: RaisedButton(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15))),
-        color: Colors.green,
-        onPressed: () {
-          Navigator.of(context).popUntil((r) => r.settings.isInitialRoute);
-        },
-        child: Text(
-          'Trang chủ',
-          style: TextStyle(color: AppTheme.onBackground),
-        ),
-      ),
-    );
-  }
-
-  Widget _loading(args) {
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: FutureBuilder(
-          future: _pay.pay(
-              pageSeatArgs.time.scheduleId,
-              _pointUsed,
-              _selectedSeats.entries
-                  .map((value) => value.value.seatId)
-                  .toList()),
-          builder: (context, snapshot) {
-            if (!snapshot.hasError && snapshot.hasData) {
-              return _success({'title': AppString.thanhtoanthanhcong});
-            }
-            return Center(
-              child: Container(
-                width: (_width / 100) * 80,
-                height: (_height / 100) * 30,
-                decoration: BoxDecoration(
-                    color: AppTheme.onBackground,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      LoadingWidget(
-                        color: Colors.green,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          args['title'],
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.green),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ));
   }
 }
