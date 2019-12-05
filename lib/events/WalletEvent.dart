@@ -22,7 +22,7 @@ class WalletChanged extends WalletEvent {
 class PayButtonPressed extends WalletEvent {
   final Map<String, Seats> selectedSeats;
   final double point;
-  PayButtonPressed({@required this.selectedSeats, this.point});
+  PayButtonPressed({@required this.selectedSeats, @required this.point});
 
   @override
   // TODO: implement props
