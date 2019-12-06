@@ -18,13 +18,3 @@ class WalletChanged extends WalletEvent {
   // TODO: implement props
   List<Object> get props => [moneyWallet];
 }
-
-class PayButtonPressed extends WalletEvent {
-  final Map<String, Seats> selectedSeats;
-  final double point;
-  PayButtonPressed({@required this.selectedSeats, @required this.point});
-
-  @override
-  // TODO: implement props
-  List<Object> get props => [selectedSeats, point];
-}
