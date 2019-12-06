@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cgv_clone/blocs/SlideBloc.dart';
-import 'package:cgv_clone/business/remote/FetchSlide.dart';
 import 'package:cgv_clone/events/SlideEvent.dart';
 import 'package:cgv_clone/models/SlideModel.dart';
 import 'package:cgv_clone/states/SlideState.dart';
@@ -25,7 +24,6 @@ class _SlideHomePageWidgetState extends State<SlideHomePageWidget> {
   Duration duration = Duration(seconds: 4);
   int _currentPage = 0;
   List<Widget> _slides = List();
-  FetchSlide _fetchSlide = FetchSlide();
   SlideBloc _slideBloc;
 
   @override
@@ -50,11 +48,9 @@ class _SlideHomePageWidgetState extends State<SlideHomePageWidget> {
 
   Widget _slidesLayout(SlideModel slides) {
     return Container(
-      child: FutureBuilder(
-        future: _fetchSlide.fetch(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasError && snapshot.hasData) {
-            final SlideModel slides = snapshot.data;
+      child: BlocBuilder<SlideBloc, SlideState>(
+        builder: (context, slideState) {
+          if (slideState is SlideLoaded) {
             slides.slides.forEach((value) {
               _slides.add(Container(
                 decoration: BoxDecoration(
