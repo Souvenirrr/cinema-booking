@@ -6,8 +6,8 @@ import 'package:cgv_clone/states/TabState.dart';
 import 'package:meta/meta.dart';
 
 class TabBloc extends Bloc<TabEvent, TabState> {
-  final MovieRepository tabRepository;
-  TabBloc({@required this.tabRepository});
+  final MovieRepository movieRepository;
+  TabBloc({@required this.movieRepository});
   @override
   // TODO: implement initialState
   TabState get initialState => TabInital();
@@ -17,7 +17,7 @@ class TabBloc extends Bloc<TabEvent, TabState> {
     // TODO: implement mapEventToState
     if (event is TabStarted) {
       yield TabLoading();
-      final MovieModel movies = await tabRepository.fetchByTab(event.tabType);
+      final MovieModel movies = await movieRepository.fetchByTab(event.tabType);
       yield TabLoaded(movies: movies);
     }
     if (event is TabExited) {}

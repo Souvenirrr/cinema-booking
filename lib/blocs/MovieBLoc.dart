@@ -14,7 +14,7 @@ class MovieBLoc extends Bloc<MovieEvent, MovieState> {
   Stream<MovieState> mapEventToState(MovieEvent event) async* {
     // TODO: implement mapEventToState
     if (event is MoviePressed) {
-      Navigator.of(event.context).pushNamed(RounterNames.movieDetail,
+      Navigator.of(event.context).pushNamed(RouterNames.movieDetail,
           arguments: MovieDetailArgs(movie: event.movie));
     }
   }

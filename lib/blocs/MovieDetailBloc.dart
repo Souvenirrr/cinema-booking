@@ -26,7 +26,7 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     }
     if (event is MovieDetailButtonPressed) {
       print(event);
-      Navigator.of(event.context).pushNamed(RounterNames.schedule,
+      Navigator.of(event.context).pushNamed(RouterNames.schedule,
           arguments: PageScheduleArgs(movieDetail: event.movieDetail));
     }
     if (event is MovieDetailExited) {}

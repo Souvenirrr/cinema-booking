@@ -32,7 +32,7 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
       yield ScheduleLoaded(schedules: schedules);
     }
     if (event is SchedulePressed) {
-      Navigator.of(event.context).pushNamed(RounterNames.seat,
+      Navigator.of(event.context).pushNamed(RouterNames.seat,
           arguments:
               PageSeatArgs(time: event.time, movieDetail: event.movieDetail));
     }
