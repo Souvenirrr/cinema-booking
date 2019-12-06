@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cgv_clone/blocs/MovieBLoc.dart';
 import 'package:cgv_clone/blocs/TabBloc.dart';
-import 'package:cgv_clone/business/remote/FetchMovieOnCinema.dart';
 import 'package:cgv_clone/events/MovieEvent.dart';
 import 'package:cgv_clone/events/TabEvent.dart';
 import 'package:cgv_clone/models/MovieModel.dart';
@@ -34,8 +33,6 @@ class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
   double _currentIndex = 0;
   final double _viewportFraction = 0.75;
   var firstopen = true;
-  final FetchMovieOnSwipeHorizontalLayout _fetchMovieOnSwipeHorizontalLayout =
-      FetchMovieOnSwipeHorizontalLayout();
   TabBloc _tabBloc;
   MovieModel _movies;
 
