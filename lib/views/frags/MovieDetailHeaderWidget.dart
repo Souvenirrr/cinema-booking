@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cgv_clone/blocs/MovieDetailBloc.dart';
-import 'package:cgv_clone/business/remote/Endpoint.dart';
 import 'package:cgv_clone/events/MovieDetailEvent.dart';
 import 'package:cgv_clone/models/MovieDetailModel.dart';
+import 'package:cgv_clone/navigate/Endpoint.dart';
 import 'package:cgv_clone/states/MovieDetailState.dart';
 import 'package:cgv_clone/string/AppString.dart';
 import 'package:cgv_clone/string/Youtube.dart';
