@@ -13,7 +13,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
 
   @override
   // TODO: implement initialState
-  WalletState get initialState => PayInital();
+  WalletState get initialState => WalletInital();
 
   @override
   Stream<WalletState> mapEventToState(WalletEvent event) async* {
@@ -21,10 +21,6 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     if (event is WalletLoadStarted) {
       final AccountModel wallet = await accountRepository.fetch();
       yield WalletLoaded(wallet: wallet);
-    }
-    if (event is PayButtonPressed) {
-      print(event.point);
-      print(event.selectedSeats.keys.length);
     }
   }
 }
