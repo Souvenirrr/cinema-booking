@@ -4,6 +4,7 @@ import 'package:cgv_clone/blocs/CartBloc.dart';
 import 'package:cgv_clone/blocs/HomeBloc.dart';
 import 'package:cgv_clone/blocs/MovieBLoc.dart';
 import 'package:cgv_clone/blocs/MovieDetailBloc.dart';
+import 'package:cgv_clone/blocs/PayBloc.dart';
 import 'package:cgv_clone/blocs/ScheduleBLoc.dart';
 import 'package:cgv_clone/blocs/SeatBLoc.dart';
 import 'package:cgv_clone/blocs/SlideBloc.dart';
@@ -13,6 +14,7 @@ import 'package:cgv_clone/navigate/GenarateRouter.dart';
 import 'package:cgv_clone/repsitories/AccountRepository.dart';
 import 'package:cgv_clone/repsitories/MovieDetailRepository.dart';
 import 'package:cgv_clone/repsitories/MovieRepository.dart';
+import 'package:cgv_clone/repsitories/PayRepository.dart';
 import 'package:cgv_clone/repsitories/ScheduleRepository.dart';
 import 'package:cgv_clone/repsitories/SeatRepository.dart';
 import 'package:cgv_clone/repsitories/SlideRepository.dart';
@@ -26,6 +28,7 @@ final MovieRepository _tabRepository = MovieRepository();
 final ScheduleRepository _scheduleRepository = ScheduleRepository();
 final AccountRepository _accountRepository = AccountRepository();
 final SeatRepository _seatRepository = SeatRepository();
+final PayRepository _payRepository = PayRepository();
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -81,6 +84,9 @@ void main() {
       ),
       BlocProvider<CartBloc>(
         create: (context) => CartBloc(),
+      ),
+       BlocProvider<PayBloc>(
+        create: (context) => PayBloc(payRepository: _payRepository),
       ),
     ],
     child: App(),
