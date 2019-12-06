@@ -9,7 +9,7 @@ class WalletState extends Equatable {
   List<Object> get props => null;
 }
 
-class PayInital extends WalletState {}
+class WalletInital extends WalletState {}
 
 class WalletLoading extends WalletState {}
 
@@ -21,31 +21,4 @@ class WalletLoaded extends WalletState {
 class WalletFailure extends WalletState {
   final String msg;
   WalletFailure({@required this.msg});
-}
-
-class PayLoad extends WalletState {
-  final Map<String, Seats> selectedSeats;
-  final double point;
-  PayLoad({@required this.selectedSeats, @required this.point});
-
-  @override
-  // TODO: implement props
-  List<Object> get props => [selectedSeats, point];
-}
-
-class PayLoading extends WalletState {}
-
-class Payed extends WalletState {
-  final Map<String, Seats> selectedSeats;
-  final double totalPrice;
-  Payed({@required this.selectedSeats, @required this.totalPrice});
-
-  @override
-  // TODO: implement props
-  List<Object> get props => [selectedSeats, totalPrice];
-}
-
-class PayFailure extends WalletState {
-  final String msg;
-  PayFailure({@required this.msg});
 }
