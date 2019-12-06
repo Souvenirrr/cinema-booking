@@ -17,7 +17,7 @@ enum RouterPath {
   qr,
 }
 
-class RounterNames {
+class RouterNames {
   static const String account = '/account';
   static const String home = '/';
   static const String movieDetail = '/movieDetail';
@@ -28,27 +28,27 @@ class RounterNames {
 
 class Routers {
   static final define = {
-    RounterNames.account: (context) => AccountPage(),
-    RounterNames.home: (context) => HomePage(),
-    RounterNames.account: (context) => AccountPage(),
+    RouterNames.account: (context) => AccountPage(),
+    RouterNames.home: (context) => HomePage(),
+    RouterNames.account: (context) => AccountPage(),
   };
 }
 
 class GenarateRouter {
   static settings(RouteSettings settings) {
     switch (settings.name) {
-      case RounterNames.account:
+      case RouterNames.account:
         return MaterialPageRoute(builder: (context) => AccountPage());
-      case RounterNames.home:
+      case RouterNames.home:
         return MaterialPageRoute(builder: (context) => HomePage());
-      case RounterNames.movieDetail:
+      case RouterNames.movieDetail:
         if (settings.arguments is MovieDetailArgs)
           return MaterialPageRoute(
               builder: (context) => MovieDetailPage(
                     pageMovieDetailArgs: settings.arguments,
                   ));
         break;
-      case RounterNames.schedule:
+      case RouterNames.schedule:
         if (settings.arguments is PageScheduleArgs) {
           return MaterialPageRoute(
             builder: (context) => SchedulePage(
@@ -57,7 +57,7 @@ class GenarateRouter {
           );
         }
         break;
-      case RounterNames.seat:
+      case RouterNames.seat:
         if (settings.arguments is PageSeatArgs) {
           return MaterialPageRoute(
             builder: (context) => SeatPage(pageSeatArgs: settings.arguments,),
