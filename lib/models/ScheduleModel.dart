@@ -98,21 +98,21 @@ class Formats {
 }
 
 class Times {
-  String scheduleId;
+  String scheduleID;
   String start;
   String end;
 
-  Times({this.scheduleId, this.start, this.end});
+  Times({this.scheduleID, this.start, this.end});
 
   Times.fromJson(Map<String, dynamic> json) {
-    scheduleId = json['schedule_id'];
+    scheduleID = json['schedule_id'];
     start = json['start'];
     end = json['end'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['schedule_id'] = this.scheduleId;
+    data['schedule_id'] = this.scheduleID;
     data['start'] = this.start;
     data['end'] = this.end;
     return data;
