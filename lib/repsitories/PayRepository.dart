@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:cgv_clone/business/remote/Endpoint.dart';
 import 'package:cgv_clone/models/PaymentModel.dart';
+import 'package:cgv_clone/navigate/Endpoint.dart';
 import 'package:dio/dio.dart';
 
 class PayRepository {
