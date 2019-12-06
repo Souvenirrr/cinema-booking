@@ -1,10 +1,10 @@
 import 'package:cgv_clone/blocs/ScheduleBLoc.dart';
-import 'package:cgv_clone/calendar_week/CalendarWeek.dart';
 import 'package:cgv_clone/events/ScheduleEvent.dart';
 import 'package:cgv_clone/models/PageScheduleArgs.dart';
 import 'package:cgv_clone/models/ScheduleModel.dart';
 import 'package:cgv_clone/states/ScheduleState.dart';
 import 'package:cgv_clone/views/Theme.dart';
+import 'package:cgv_clone/views/calendar_week/CalendarWeek.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
 import 'package:cgv_clone/views/frags/ScheduleItemExpanded.dart';
 import 'package:flutter/material.dart';
