@@ -1,5 +1,10 @@
 import 'package:cgv_clone/blocs/HomeBloc.dart';
+import 'package:cgv_clone/blocs/MovieBLoc.dart';
+import 'package:cgv_clone/blocs/SlideBloc.dart';
+import 'package:cgv_clone/blocs/TabBloc.dart';
 import 'package:cgv_clone/events/HomeEvent.dart';
+import 'package:cgv_clone/repsitories/MovieRepository.dart';
+import 'package:cgv_clone/repsitories/SlideRepository.dart';
 import 'package:cgv_clone/states/HomeState.dart';
 import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
@@ -18,14 +23,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  HomeBloc _homeBloc;
+  HomeBloc _homeBloc = HomeBloc();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    _homeBloc = BlocProvider.of<HomeBloc>(context);
     _homeBloc.add(HomeStarted());
   }
 
@@ -34,19 +37,33 @@ class _HomePageState extends State<HomePage>
     // TODO: implement build
     print('HomePage');
     return Scaffold(
-      backgroundColor: AppTheme.surfaceColor,
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, homeState) {
-          if (homeState is HomeLoading)
-            return Column(
-              children: <Widget>[
-                Expanded(flex: 2, child: SlideHomePageWidget()),
-                Expanded(flex: 6, child: TabLayoutHomeWidget())
-              ],
-            );
-          return LoadingWidget();
-        },
-      ),
-    );
+        backgroundColor: AppTheme.surfaceColor,
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<MovieBLoc>(
+              create: (context) => MovieBLoc(),
+            ),
+            BlocProvider<SlideBloc>(
+              create: (context) =>
+                  SlideBloc(slideRepository: SlideRepository()),
+            ),
+            BlocProvider<TabBloc>(
+              create: (context) => TabBloc(movieRepository: MovieRepository()),
+            ),
+          ],
+          child: BlocBuilder<HomeBloc, HomeState>(
+            bloc: _homeBloc,
+            builder: (context, homeState) {
+              if (homeState is HomeLoading)
+                return Column(
+                  children: <Widget>[
+                    Expanded(flex: 2, child: SlideHomePageWidget()),
+                    Expanded(flex: 6, child: TabLayoutHomeWidget())
+                  ],
+                );
+              return LoadingWidget();
+            },
+          ),
+        ));
   }
 }

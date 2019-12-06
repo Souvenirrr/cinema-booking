@@ -2,6 +2,7 @@ import 'package:cgv_clone/blocs/ScheduleBLoc.dart';
 import 'package:cgv_clone/events/ScheduleEvent.dart';
 import 'package:cgv_clone/models/PageScheduleArgs.dart';
 import 'package:cgv_clone/models/ScheduleModel.dart';
+import 'package:cgv_clone/repsitories/ScheduleRepository.dart';
 import 'package:cgv_clone/states/ScheduleState.dart';
 import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/calendar_week/CalendarWeek.dart';
@@ -23,14 +24,14 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   final PageScheduleArgs pageScheduleArgs;
-  ScheduleBloc _scheduleBloc;
+  ScheduleBloc _scheduleBloc =
+      ScheduleBloc(scheduleRepository: ScheduleRepository());
   _SchedulePageState({@required this.pageScheduleArgs});
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _scheduleBloc = BlocProvider.of<ScheduleBloc>(context);
     _scheduleBloc.add(ScheduleStarted(
         passPageScheduleArgs: pageScheduleArgs, dateTime: DateTime.now()));
   }
@@ -47,7 +48,10 @@ class _SchedulePageState extends State<SchedulePage> {
           title: Text(pageScheduleArgs.movieDetail.movieName),
         ),
         backgroundColor: AppTheme.backgroundColor,
-        body: _layout(context));
+        body: BlocProvider<ScheduleBloc>(
+          create: (context) => _scheduleBloc,
+          child: _layout(context),
+        ));
   }
 
   Container _layout(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:cgv_clone/blocs/MovieDetailBloc.dart';
 import 'package:cgv_clone/events/MovieDetailEvent.dart';
 import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageMovieDetailArgs.dart';
+import 'package:cgv_clone/repsitories/MovieDetailRepository.dart';
 import 'package:cgv_clone/states/MovieDetailState.dart';
 import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
@@ -13,7 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final MovieDetailArgs pageMovieDetailArgs;
-  MovieDetailBloc _movieDetailBloc;
+  MovieDetailBloc _movieDetailBloc =
+      MovieDetailBloc(movieDetailRepository: MovieDetailRepository());
 
   MovieDetailPage({@required this.pageMovieDetailArgs});
 
@@ -21,25 +23,27 @@ class MovieDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     print('MovieDetailPage');
-    _movieDetailBloc = BlocProvider.of<MovieDetailBloc>(context);
     _movieDetailBloc
         .add(MovieDetailStarted(movieDetailArgs: pageMovieDetailArgs));
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: AppTheme.backgroundColor,
+        ),
         backgroundColor: AppTheme.backgroundColor,
-      ),
-      backgroundColor: AppTheme.backgroundColor,
-      body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
-        builder: (context, movieDetailState) {
-          if (movieDetailState is MovieDetailLoading) return LoadingWidget();
-          if (movieDetailState is MovieDetailLoaded)
-            return _layout(movieDetailState.movieDetail);
-          return LoadingWidget();
-        },
-      ),
-    );
+        body: BlocProvider<MovieDetailBloc>(
+          create: (context) => _movieDetailBloc,
+          child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+            builder: (context, movieDetailState) {
+              if (movieDetailState is MovieDetailLoading)
+                return LoadingWidget();
+              if (movieDetailState is MovieDetailLoaded)
+                return _layout(movieDetailState.movieDetail);
+              return LoadingWidget();
+            },
+          ),
+        ));
   }
 
   Widget _layout(MovieDetailModel movieDetail) {

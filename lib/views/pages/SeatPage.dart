@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cgv_clone/blocs/CartBloc.dart';
 import 'package:cgv_clone/blocs/PayBloc.dart';
 import 'package:cgv_clone/blocs/SeatBLoc.dart';
@@ -10,6 +12,10 @@ import 'package:cgv_clone/models/AccountModel.dart';
 import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageSeatArgs.dart';
 import 'package:cgv_clone/models/SeatModel.dart';
+import 'package:cgv_clone/navigate/GenarateRouter.dart';
+import 'package:cgv_clone/repsitories/AccountRepository.dart';
+import 'package:cgv_clone/repsitories/PayRepository.dart';
+import 'package:cgv_clone/repsitories/SeatRepository.dart';
 import 'package:cgv_clone/states/CartState.dart';
 import 'package:cgv_clone/states/PayState.dart';
 import 'package:cgv_clone/states/SeatState.dart';
@@ -61,10 +67,10 @@ class _SeatPageState extends State<SeatPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _seatBloc = BlocProvider.of<SeatBloc>(context);
-    _walletBloc = BlocProvider.of<WalletBloc>(context);
-    _cartBloc = BlocProvider.of<CartBloc>(context);
-    _payBloc = BlocProvider.of<PayBloc>(context);
+    _seatBloc = SeatBloc(seatRepository: SeatRepository());
+    _walletBloc = WalletBloc(accountRepository: AccountRepository());
+    _cartBloc = CartBloc();
+    _payBloc = PayBloc(payRepository: PayRepository());
 
     _walletBloc.add(WalletLoadStarted());
     _seatBloc.add(SeatLoadStarted(scheduleID: pageSeatArgs.time.scheduleID));
@@ -94,6 +100,7 @@ class _SeatPageState extends State<SeatPage> {
             Expanded(
               flex: 7,
               child: BlocBuilder<SeatBloc, SeatState>(
+                bloc: _seatBloc,
                 builder: (context, seatState) {
                   if (seatState is SeatsLoaded) return _seats(seatState.seats);
                   return LoadingWidget();
@@ -257,6 +264,7 @@ class _PayableState extends State<Payable> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
             color: AppTheme.surfaceColor),
         child: BlocBuilder<WalletBloc, WalletState>(
+          bloc: _walletBloc,
           builder: (context, cartState) {
             if (cartState is WalletLoaded) {
               _isLoadedPaymentInfo = true;
@@ -290,6 +298,7 @@ class _PayableState extends State<Payable> {
   Container _payment(AccountModel wallet) {
     return Container(
       child: BlocBuilder<CartBloc, CartState>(
+        bloc: _cartBloc,
         builder: (context, payState) {
           if (payState is CartLoaded) {
             return _money(
@@ -528,34 +537,36 @@ class _PayableState extends State<Payable> {
                   )
                 ],
               )),
-          Expanded(flex: 1, child: _payButton())
+          Expanded(flex: 1, child: _payButton(wallet))
         ],
       ),
     );
   }
 
-  Padding _payButton() {
+  Padding _payButton(AccountModel wallet) {
     return Padding(
       padding: EdgeInsets.only(left: 5, right: 5),
       child: RaisedButton(
         elevation: 0,
         onPressed: () {
-          print('wallet ');
           final state = _cartBloc.state;
           if (state is CartLoaded && state.selectedSeats.keys.length > 0) {
-            _showDialog(DialogType.confirm, {
-              'title': 'Xác nhận thanh toán',
-              'content': 'Bạn sẽ thanh toán ' +
-                  formatCurrency.format(state.totalPriceWithPoint).toString() +
-                  ' VND cho ' +
-                  state.selectedSeats.keys.length.toString() +
-                  ' vé xem phim.',
-              'action_1': 'Huỷ',
-              'action_2': 'Thanh toán',
-              'point': _pointUsed,
-              'scheduleID': pageSeatArgs.time.scheduleID,
-              'selectedSeats': state.selectedSeats
-            });
+            if (state.totalPriceWithPoint < double.parse(wallet.money)) {
+              _showDialog(DialogType.confirm, {
+                'title': AppString.xacnhanthanhtoan,
+                'content': AppString.muave( formatCurrency
+                        .format(state.totalPriceWithPoint)
+                        .toString(), state.selectedSeats.keys.length),
+                'action_1': AppString.huy,
+                'action_2': AppString.thanhtoan,
+                'point': _pointUsed,
+                'scheduleID': pageSeatArgs.time.scheduleID,
+                'selectedSeats': state.selectedSeats
+              });
+            } else {
+              print('Khong du so du');
+              _showDialog(DialogType.error, {'title': AppString.khongdusodu});
+            }
           }
         },
         shape: RoundedRectangleBorder(
@@ -579,6 +590,7 @@ class _PayableState extends State<Payable> {
           if (dialogType == DialogType.confirm) return _confirm(args);
           if (dialogType == DialogType.success) return _success(args);
           if (dialogType == DialogType.loading) return _loading(args);
+          if (dialogType == DialogType.error) return _error(args);
         });
   }
 
@@ -586,11 +598,12 @@ class _PayableState extends State<Payable> {
     return AlertDialog(
       title: Text(args['title']),
       content: BlocBuilder<PayBloc, PayState>(
+        bloc: _payBloc,
         builder: (context, payState) {
           if (payState is Payed) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               _showDialog(
-                  DialogType.success, {'title': 'Thanh toán thành công'});
+                  DialogType.success, {'title': AppString.thanhtoanthanhcong});
             });
           }
           return Text(args['content']);
@@ -654,6 +667,39 @@ class _PayableState extends State<Payable> {
         ));
   }
 
+  Widget _error(args) {
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Container(
+            width: (_width / 100) * 80,
+            height: (_height / 100) * 30,
+            decoration: BoxDecoration(
+                color: AppTheme.onBackground,
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(
+                    Icons.error,
+                    size: (_width / 100) * 20,
+                    color: Colors.red,
+                  ),
+                  Text(
+                    args['title'],
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.red),
+                  ),
+                  _exitButton()
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
   Align _homeButton() {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -667,6 +713,25 @@ class _PayableState extends State<Payable> {
         },
         child: Text(
           'Trang chủ',
+          style: TextStyle(color: AppTheme.onBackground),
+        ),
+      ),
+    );
+  }
+
+  Align _exitButton() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: RaisedButton(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        color: Colors.red,
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Text(
+          'Thoát',
           style: TextStyle(color: AppTheme.onBackground),
         ),
       ),
