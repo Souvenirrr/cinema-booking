@@ -1,6 +1,7 @@
 Issues:
     - Breaked app when has lost connect
     - Error cart money not update after select or unselect a seat
+    - Money format in seatPage cart total
 
 Sloved:
     - How to set height of Contaner() inside Expanded() inside Column(): Wrap it with Align()

@@ -1,11 +1,16 @@
 {
-    "username": "minhduc",
-    "phone": "0376460699",
-    "cmt": "061084795",
-    "email": "minhduc25211997@gmail.com",
-    "sex": "male",
-    "birthday": "25/2/1997",
-    "point":1000,
-    "valueOf1Point": 1000,
-    "money":"300000"
+    "status":"ok",
+    "msg":"done",
+    "token": "kdninfjdrfnknsdcjdfkndfklnvdfjkgndfklgndfjkgndffjknfkl",
+    "info": {
+        "username": "minhduc",
+        "phone": "0376460699",
+        "cmt": "061084795",
+        "email": "minhduc25211997@gmail.com",
+        "sex": "male",
+        "birthday": "25/2/1997",
+        "point":1000,
+        "valueOf1Point": 1000,
+        "money":"300000"
+    }
 }
