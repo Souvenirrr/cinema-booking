@@ -18,7 +18,10 @@ class SlideBloc extends Bloc<SlideEvent, SlideState> {
     if (event is SlideStarted) {
       yield SlideLoading();
       final SlideModel slides = await slideRepository.fetch();
-      yield SlideLoaded(slides: slides);
+      if (slides != null)
+        yield SlideLoaded(slides: slides);
+      else
+        yield SlideLoadFailure(msg: 'Error');
     }
     if (event is SlideExited) {}
   }

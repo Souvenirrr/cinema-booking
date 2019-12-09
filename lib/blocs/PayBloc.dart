@@ -22,10 +22,13 @@ class PayBloc extends Bloc<PayEvent, PayState> {
           event.scheduleID,
           event.point,
           event.selectedSeats.entries.map((ele) => ele.value.seatId).toList());
-      yield Payed(
-        totalPrice: null,
-        selectedSeats: null,
-      );
+      if (payment != null)
+        yield Payed(
+          totalPrice: null,
+          selectedSeats: null,
+        );
+      else
+        yield PayFailure(msg: 'Error');
     }
   }
 }

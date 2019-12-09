@@ -38,11 +38,14 @@ class _AccountPageState extends State<AccountPage>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppTheme.backgroundColor,
         title: TabBar(
+            onTap: (_) {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
             controller: _tabController,
             indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(color: AppTheme.onSurface)),
@@ -51,12 +54,14 @@ class _AccountPageState extends State<AccountPage>
       body: Container(
           padding: MediaQuery.of(context).padding,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Expanded(
                   flex: 4,
                   child: TabBarView(
                     controller: _tabController,
                     children: _tabLayouts,
+                    physics: NeverScrollableScrollPhysics(),
                   )),
               Expanded(
                   flex: 1,

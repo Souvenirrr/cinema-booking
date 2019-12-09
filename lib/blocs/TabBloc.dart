@@ -18,7 +18,10 @@ class TabBloc extends Bloc<TabEvent, TabState> {
     if (event is TabStarted) {
       yield TabLoading();
       final MovieModel movies = await movieRepository.fetchByTab(event.tabType);
-      yield TabLoaded(movies: movies);
+      if (movies != null)
+        yield TabLoaded(movies: movies);
+      else
+        yield TabLoadFailure(msg: 'Error');
     }
     if (event is TabExited) {}
   }

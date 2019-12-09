@@ -55,7 +55,7 @@ class MovieDetailHeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  movieDetail.movieName,
+                  movieDetail.data.movieName,
                   style: TextStyle(
                       color: AppTheme.onSurface,
                       fontSize: 18,
@@ -69,7 +69,7 @@ class MovieDetailHeaderWidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Text(
-                    movieDetail.movieCens,
+                    movieDetail.data.movieCens,
                     style: TextStyle(color: Colors.black, fontSize: 10),
                   ),
                 ),
@@ -81,7 +81,7 @@ class MovieDetailHeaderWidget extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
             child: RaisedButton(
               onPressed: () {
-                print(movieDetail.movieName);
+                print(movieDetail.data.movieName);
                 _movieDetailBloc.add(MovieDetailButtonPressed(
                     context: context, movieDetail: movieDetail));
               },
@@ -109,9 +109,9 @@ class MovieDetailHeaderWidget extends StatelessWidget {
           height: 200,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   image: CachedNetworkImageProvider(
-                      Endpoint.ytb_img_thumb(movieDetail.movieTrailerYtbId)))),
+                      Endpoint.ytb_img_thumb(movieDetail.data.movieTrailer)))),
         ),
         Container(
           height: 200,
@@ -120,17 +120,19 @@ class MovieDetailHeaderWidget extends StatelessWidget {
         ),
         Container(
           height: 200,
-          child: Center(
-              child: IconButton(
-            onPressed: () {
-              _playVideo(movieDetail.movieTrailerYtbId);
-            },
-            icon: Icon(
-              Icons.play_circle_filled,
-              size: 70,
-              color: AppTheme.onSurface,
+          child: Align(
+            alignment: Alignment.center,
+            child: InkWell(
+              onTap: () {
+                _playVideo(movieDetail.data.movieTrailer);
+              },
+              child: Icon(
+                Icons.play_circle_filled,
+                size: 70,
+                color: AppTheme.onSurface,
+              ),
             ),
-          )),
+          ),
         )
       ],
     );

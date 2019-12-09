@@ -31,7 +31,7 @@ class MovieDetailInfo extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  movieDetailData.movieGenres,
+                  movieDetailData.data.movieCens,
                   style: TextStyle(
                       color: AppTheme.onSurface,
                       fontWeight: FontWeight.w400,
@@ -58,7 +58,7 @@ class MovieDetailInfo extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  movieDetailData.movieFormat,
+                  movieDetailData.data.movieForm,
                   style: TextStyle(
                       color: AppTheme.onSurface,
                       fontWeight: FontWeight.w400,
@@ -85,7 +85,7 @@ class MovieDetailInfo extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  movieDetailData.movieLenght,
+                  movieDetailData.data.movieLeng,
                   style: TextStyle(
                       color: AppTheme.onSurface,
                       fontWeight: FontWeight.w400,
@@ -112,7 +112,7 @@ class MovieDetailInfo extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  movieDetailData.movieRelease,
+                  movieDetailData.data.movieRele,
                   style: TextStyle(
                       color: AppTheme.onSurface,
                       fontWeight: FontWeight.w400,

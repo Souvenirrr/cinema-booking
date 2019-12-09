@@ -15,7 +15,7 @@ class MovieDetailDescriptionWidget extends StatelessWidget {
           color: Theme.of(context).accentColor,
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Text(
-        movieDetailData.movieDescription,
+        movieDetailData.data.movieDesc,
         style: TextStyle(
             color: AppTheme.onSurface,
             fontWeight: FontWeight.w400,

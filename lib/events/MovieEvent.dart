@@ -11,7 +11,7 @@ class MovieEvent extends Equatable {
 
 class MoviePressed extends MovieEvent {
   BuildContext context;
-  final Movies movie;
+  final Data movie;
   MoviePressed({@required this.context, @required this.movie});
 
   @override

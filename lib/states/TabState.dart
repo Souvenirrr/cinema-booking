@@ -27,6 +27,6 @@ class TabLoadFailure extends TabState {
 }
 
 class Navigate extends TabState {
-  final Movies movie;
+  final Data movie;
   Navigate({@required this.movie});
 }

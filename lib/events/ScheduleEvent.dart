@@ -1,6 +1,5 @@
 import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageScheduleArgs.dart';
-import 'package:cgv_clone/models/PageSeatArgs.dart';
 import 'package:cgv_clone/models/ScheduleModel.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

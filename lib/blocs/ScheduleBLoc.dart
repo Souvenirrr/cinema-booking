@@ -22,14 +22,20 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
     if (event is ScheduleStarted) {
       yield ScheduleLoading();
       final ScheduleModel schedules = await scheduleRepository.fetchByMovie(
-          event.passPageScheduleArgs.movieDetail.movieId, event.dateTime);
-      yield ScheduleLoaded(schedules: schedules);
+          event.passPageScheduleArgs.movieDetail.data.movieId.toString(), event.dateTime);
+      if (schedules != null)
+        yield ScheduleLoaded(schedules: schedules);
+      else
+        yield ScheduleLoadFailure(msg: 'Error');
     }
     if (event is ScheduleSelected) {
       yield ScheduleLoading();
       final ScheduleModel schedules = await scheduleRepository.fetchByMovie(
-          event.passPageScheduleArgs.movieDetail.movieId, event.dateTime);
-      yield ScheduleLoaded(schedules: schedules);
+          event.passPageScheduleArgs.movieDetail.data.movieId.toString(), event.dateTime);
+      if (schedules != null)
+        yield ScheduleLoaded(schedules: schedules);
+      else
+        yield ScheduleLoadFailure(msg: 'Error');
     }
     if (event is SchedulePressed) {
       Navigator.of(event.context).pushNamed(RouterNames.seat,

@@ -4,6 +4,7 @@ import 'package:cgv_clone/models/PageSeatArgs.dart';
 import 'package:cgv_clone/views/pages/AccountPage.dart';
 import 'package:cgv_clone/views/pages/HomePage.dart';
 import 'package:cgv_clone/views/pages/MovieDetailPage.dart';
+import 'package:cgv_clone/views/pages/ProfilePage.dart';
 import 'package:cgv_clone/views/pages/SchedulePage.dart';
 import 'package:cgv_clone/views/pages/SeatPage.dart';
 import 'package:flutter/material.dart';
@@ -24,23 +25,18 @@ class RouterNames {
   static const String schedule = '/schedule';
   static const String seat = '/seat';
   static const qr = '/qr';
+  static const profile = '/profile';
 }
 
-class Routers {
-  static final define = {
-    RouterNames.account: (context) => AccountPage(),
-    RouterNames.home: (context) => HomePage(),
-    RouterNames.account: (context) => AccountPage(),
-  };
-}
-
-class GenarateRouter {
+class GenerateRouter {
   static settings(RouteSettings settings) {
     switch (settings.name) {
       case RouterNames.account:
         return MaterialPageRoute(builder: (context) => AccountPage());
       case RouterNames.home:
         return MaterialPageRoute(builder: (context) => HomePage());
+      case RouterNames.profile:
+        return MaterialPageRoute(builder: (context) => ProfilePage());
       case RouterNames.movieDetail:
         if (settings.arguments is MovieDetailArgs)
           return MaterialPageRoute(
@@ -60,7 +56,9 @@ class GenarateRouter {
       case RouterNames.seat:
         if (settings.arguments is PageSeatArgs) {
           return MaterialPageRoute(
-            builder: (context) => SeatPage(pageSeatArgs: settings.arguments,),
+            builder: (context) => SeatPage(
+              pageSeatArgs: settings.arguments,
+            ),
           );
         }
         break;

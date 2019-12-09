@@ -3,6 +3,7 @@ import 'package:cgv_clone/blocs/MovieBLoc.dart';
 import 'package:cgv_clone/blocs/SlideBloc.dart';
 import 'package:cgv_clone/blocs/TabBloc.dart';
 import 'package:cgv_clone/events/HomeEvent.dart';
+import 'package:cgv_clone/repsitories/AuthenticateRepository.dart';
 import 'package:cgv_clone/repsitories/MovieRepository.dart';
 import 'package:cgv_clone/repsitories/SlideRepository.dart';
 import 'package:cgv_clone/states/HomeState.dart';
@@ -23,7 +24,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  HomeBloc _homeBloc = HomeBloc();
+  HomeBloc _homeBloc =
+      HomeBloc(authenticateRepository: AuthenticateRepository());
 
   @override
   void initState() {
@@ -57,7 +59,44 @@ class _HomePageState extends State<HomePage>
               if (homeState is HomeLoading)
                 return Column(
                   children: <Widget>[
-                    Expanded(flex: 2, child: SlideHomePageWidget()),
+                    Expanded(
+                        flex: 2,
+                        child: Stack(
+                          children: <Widget>[
+                            SlideHomePageWidget(),
+                            IgnorePointer(
+                              ignoring: true,
+                              child: Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment(0, 0.1),
+                                      end: Alignment(0, 1),
+                                      colors: [
+                                        Colors.black.withOpacity(0.2),
+                                        Colors.black.withOpacity(0)
+                                      ]),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).padding.top,
+                              left: 5,
+                              child: IconButton(
+                                onPressed: () {
+                                  _homeBloc.add(ProfileButtonPressed(
+                                      context: this.context));
+                                },
+                                icon: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
                     Expanded(flex: 6, child: TabLayoutHomeWidget())
                   ],
                 );

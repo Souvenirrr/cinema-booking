@@ -2,8 +2,10 @@ import 'package:cgv_clone/blocs/MovieDetailBloc.dart';
 import 'package:cgv_clone/events/MovieDetailEvent.dart';
 import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageMovieDetailArgs.dart';
+import 'package:cgv_clone/repsitories/AuthenticateRepository.dart';
 import 'package:cgv_clone/repsitories/MovieDetailRepository.dart';
 import 'package:cgv_clone/states/MovieDetailState.dart';
+import 'package:cgv_clone/string/AppString.dart';
 import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
 import 'package:cgv_clone/views/frags/MovieDetailDescriptionWidget.dart';
@@ -14,8 +16,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final MovieDetailArgs pageMovieDetailArgs;
-  MovieDetailBloc _movieDetailBloc =
-      MovieDetailBloc(movieDetailRepository: MovieDetailRepository());
+  MovieDetailBloc _movieDetailBloc = MovieDetailBloc(
+    movieDetailRepository: MovieDetailRepository(),
+    authenticateRepository: AuthenticateRepository(),
+  );
 
   MovieDetailPage({@required this.pageMovieDetailArgs});
 
@@ -29,6 +33,7 @@ class MovieDetailPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
+          title: Text(AppString.movieDetail),
           backgroundColor: AppTheme.backgroundColor,
         ),
         backgroundColor: AppTheme.backgroundColor,

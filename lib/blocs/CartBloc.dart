@@ -24,7 +24,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       else
         totalPriceWithPoint = 0;
 
-      //print('totalPrice $totalPrice');
       yield CartLoaded(
           selectedSeats: event.selectedSeats,
           totalPriceWithPoint: totalPriceWithPoint,

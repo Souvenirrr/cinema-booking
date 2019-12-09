@@ -1,4 +1,31 @@
 class AccountModel {
+  String status;
+  String msg;
+  String token;
+  Info info;
+
+  AccountModel({this.status, this.msg, this.token, this.info});
+
+  AccountModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    msg = json['msg'];
+    token = json['token'];
+    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['msg'] = this.msg;
+    data['token'] = this.token;
+    if (this.info != null) {
+      data['info'] = this.info.toJson();
+    }
+    return data;
+  }
+}
+
+class Info {
   String username;
   String phone;
   String cmt;
@@ -9,7 +36,7 @@ class AccountModel {
   int valueOf1Point;
   String money;
 
-  AccountModel(
+  Info(
       {this.username,
       this.phone,
       this.cmt,
@@ -20,7 +47,7 @@ class AccountModel {
       this.valueOf1Point,
       this.money});
 
-  AccountModel.fromJson(Map<String, dynamic> json) {
+  Info.fromJson(Map<String, dynamic> json) {
     username = json['username'];
     phone = json['phone'];
     cmt = json['cmt'];

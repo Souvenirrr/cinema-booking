@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cgv_clone/blocs/CartBloc.dart';
 import 'package:cgv_clone/blocs/PayBloc.dart';
 import 'package:cgv_clone/blocs/SeatBLoc.dart';
@@ -12,7 +10,6 @@ import 'package:cgv_clone/models/AccountModel.dart';
 import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageSeatArgs.dart';
 import 'package:cgv_clone/models/SeatModel.dart';
-import 'package:cgv_clone/navigate/GenarateRouter.dart';
 import 'package:cgv_clone/repsitories/AccountRepository.dart';
 import 'package:cgv_clone/repsitories/PayRepository.dart';
 import 'package:cgv_clone/repsitories/SeatRepository.dart';
@@ -26,7 +23,6 @@ import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 double _width, _height;
 Map<String, double> seatItemSize = {'width': 0.0, 'height': 0.0, 'margin': 0.0};
@@ -37,10 +33,13 @@ SeatBloc _seatBloc;
 WalletBloc _walletBloc;
 CartBloc _cartBloc;
 PayBloc _payBloc;
+double _pointUsed = 0;
 
 class SeatPage extends StatefulWidget {
   final PageSeatArgs pageSeatArgs;
+
   SeatPage({@required this.pageSeatArgs});
+
   @override
   _SeatPageState createState() =>
       _SeatPageState(pageSeatArgs: this.pageSeatArgs);
@@ -48,7 +47,9 @@ class SeatPage extends StatefulWidget {
 
 class _SeatPageState extends State<SeatPage> {
   final PageSeatArgs pageSeatArgs;
+
   _SeatPageState({@required this.pageSeatArgs});
+
   ScrollController hScrollCtrl;
 
   @override
@@ -61,6 +62,7 @@ class _SeatPageState extends State<SeatPage> {
     _walletBloc = null;
     _cartBloc = null;
     _payBloc = null;
+    _pointUsed = 0;
   }
 
   @override
@@ -89,6 +91,7 @@ class _SeatPageState extends State<SeatPage> {
       appBar: AppBar(
         backgroundColor: AppTheme.backgroundColor,
         elevation: 0,
+        title: Text(AppString.chongoi),
       ),
       body: Container(
         child: Column(
@@ -180,8 +183,10 @@ class SeatItem extends StatefulWidget {
   final String row;
   final Seats seats;
   final PageSeatArgs pageSeatArgs;
+
   SeatItem(
       {@required this.row, @required this.seats, @required this.pageSeatArgs});
+
   @override
   _SeatItemState createState() =>
       _SeatItemState(seat: this.seats, row: this.row);
@@ -191,14 +196,16 @@ class _SeatItemState extends State<SeatItem> {
   final String row;
   final Seats seat;
   bool selected = false;
+
   _SeatItemState({@required this.row, @required this.seat});
 
   _onSeatItemTap() {
     if (!seat.seatStatus && _isLoadedPaymentInfo) {
       setState(() {
-        if (_selectedSeats.keys.length <= _maxSelect)
+        if (_selectedSeats.keys.length <= _maxSelect) {
           selected = !selected;
-        else
+          _pointUsed = 0;
+        } else
           selected = false;
         if (_selectedSeats.keys.length == _maxSelect) selected = false;
       });
@@ -243,7 +250,9 @@ class _SeatItemState extends State<SeatItem> {
 class Payable extends StatefulWidget {
   final PageSeatArgs pageSeatArgs;
   final MovieDetailModel movieDetail;
+
   Payable({@required this.movieDetail, @required this.pageSeatArgs});
+
   @override
   _PayableState createState() => _PayableState(
       movieDetail: this.movieDetail, pageSeatArgs: this.pageSeatArgs);
@@ -252,9 +261,8 @@ class Payable extends StatefulWidget {
 class _PayableState extends State<Payable> {
   final MovieDetailModel movieDetail;
   final PageSeatArgs pageSeatArgs;
+
   _PayableState({@required this.movieDetail, @required this.pageSeatArgs});
-  final formatCurrency = new NumberFormat('#,##0', 'en_US');
-  double _pointUsed = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -361,7 +369,7 @@ class _PayableState extends State<Payable> {
                           ' ' +
                           AppString.ghe +
                           ': ' +
-                          formatCurrency.format(totalPriceWithPoint) +
+                          AppString.formatCurrency.format(totalPriceWithPoint) +
                           ' ' +
                           AppString.vnd
                       : '0 ' + AppString.ghe + ': 0 ' + AppString.vnd,
@@ -411,38 +419,32 @@ class _PayableState extends State<Payable> {
                             : AppTheme.backgroundColor,
                         overlayColor: Colors.transparent),
                     child: Slider(
-                      min: 0,
-                      max: wallet != null
-                          ? wallet.point >
-                                  totalPriceWithoutPoint / wallet.valueOf1Point
-                              ? totalPriceWithoutPoint / wallet.valueOf1Point
-                              : wallet.point
-                          : 0,
-                      onChanged: (double value) {
-                        if (wallet != null &&
-                            seatLength != null &&
-                            totalPriceWithPoint != null &&
-                            selectedSeats != null) {
-                          setState(() {
-                            _pointUsed = value;
-                          });
-                          _cartBloc.add(CartChanged(
-                              selectedSeats: _selectedSeats,
-                              point: _pointUsed,
-                              valueOf1Point: wallet.valueOf1Point.toDouble()));
-                        }
-                      },
-                      value: wallet != null &&
+                        min: 0,
+                        max: wallet != null
+                            ? wallet.info.point >
+                                    totalPriceWithoutPoint /
+                                        wallet.info.valueOf1Point
+                                ? totalPriceWithoutPoint /
+                                    wallet.info.valueOf1Point
+                                : wallet.info.point
+                            : 0,
+                        onChanged: (double value) {
+                          if (wallet != null &&
                               seatLength != null &&
-                              totalPriceWithoutPoint != null &&
-                              selectedSeats != null
-                          ? _pointUsed >
-                                  totalPriceWithoutPoint / wallet.valueOf1Point
-                              ? _pointUsed =
-                                  totalPriceWithoutPoint / wallet.valueOf1Point
-                              : _pointUsed
-                          : 0,
-                    ),
+                              totalPriceWithPoint != null &&
+                              selectedSeats != null) {
+                            setState(() {
+                              _pointUsed = value;
+                            });
+                            _cartBloc.add(CartChanged(
+                                selectedSeats: _selectedSeats,
+                                point:
+                                    double.parse(_pointUsed.toStringAsFixed(0)),
+                                valueOf1Point:
+                                    wallet.info.valueOf1Point.toDouble()));
+                          }
+                        },
+                        value: _pointUsed),
                   ),
                 ),
               ),
@@ -454,7 +456,7 @@ class _PayableState extends State<Payable> {
                     child: Text(
                       _pointUsed.toStringAsFixed(0) +
                           '/' +
-                          (wallet != null ? wallet.point.toString() : '0'),
+                          (wallet != null ? wallet.info.point.toString() : '0'),
                       style: TextStyle(color: AppTheme.onSurface),
                     ),
                   ))
@@ -474,7 +476,8 @@ class _PayableState extends State<Payable> {
           AppString.sodu +
               '\n' +
               (wallet != null
-                  ? formatCurrency.format(double.parse(wallet.money))
+                  ? AppString.formatCurrency
+                      .format(double.parse(wallet.info.money))
                   : '0'),
           style: TextStyle(
               color: AppTheme.onBackground, fontWeight: FontWeight.w500),
@@ -499,7 +502,7 @@ class _PayableState extends State<Payable> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          movieDetail.movieName,
+                          movieDetail.data.movieName,
                           style: TextStyle(
                             color: AppTheme.onSurface,
                             fontWeight: FontWeight.w500,
@@ -517,7 +520,7 @@ class _PayableState extends State<Payable> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            movieDetail.movieCens,
+                            movieDetail.data.movieCens,
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
@@ -528,7 +531,7 @@ class _PayableState extends State<Payable> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          movieDetail.movieFormat,
+                          movieDetail.data.movieForm,
                           style: TextStyle(
                               color: AppTheme.onSurface.withOpacity(0.7)),
                         ),
@@ -551,12 +554,14 @@ class _PayableState extends State<Payable> {
         onPressed: () {
           final state = _cartBloc.state;
           if (state is CartLoaded && state.selectedSeats.keys.length > 0) {
-            if (state.totalPriceWithPoint < double.parse(wallet.money)) {
+            if (state.totalPriceWithPoint < double.parse(wallet.info.money)) {
               _showDialog(DialogType.confirm, {
                 'title': AppString.xacnhanthanhtoan,
-                'content': AppString.muave( formatCurrency
+                'content': AppString.muave(
+                    AppString.formatCurrency
                         .format(state.totalPriceWithPoint)
-                        .toString(), state.selectedSeats.keys.length),
+                        .toString(),
+                    state.selectedSeats.keys.length),
                 'action_1': AppString.huy,
                 'action_2': AppString.thanhtoan,
                 'point': _pointUsed,

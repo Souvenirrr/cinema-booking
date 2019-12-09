@@ -16,6 +16,7 @@ import 'package:meta/meta.dart';
 
 class SwipeableFilmsWidget extends StatefulWidget {
   final TabType tabType;
+
   SwipeableFilmsWidget({@required this.tabType});
 
   @override
@@ -28,7 +29,9 @@ class SwipeableFilmsWidget extends StatefulWidget {
 class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
     with AutomaticKeepAliveClientMixin<SwipeableFilmsWidget> {
   final TabType tabType;
+
   _SwipeableFilmsWidgetState({@required this.tabType});
+
   PageController _pageController;
   double _currentIndex = 0;
   final double _viewportFraction = 0.75;
@@ -58,7 +61,7 @@ class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
 
   Widget _layout(MovieModel movies) {
     if (firstopen) {
-      _currentIndex = (movies.movies.length / 2).toInt().toDouble();
+      _currentIndex = (movies.data.length / 2).toInt().toDouble();
       _pageController = PageController(
           viewportFraction: _viewportFraction,
           initialPage: _currentIndex.toInt());
@@ -81,7 +84,7 @@ class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
         },
         child: PageView.builder(
           controller: _pageController,
-          itemCount: movies.movies.length,
+          itemCount: movies.data.length,
           itemBuilder: (context, index) {
             double scale = (_currentIndex - index).abs();
             scale = scale >= _viewportFraction ? scale : _viewportFraction;
@@ -91,7 +94,7 @@ class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
                 ' = ' +
                 scale.toString());
             return MovieItem(
-              movie: movies.movies[index],
+              movie: movies.data[index],
               scale: scale,
             );
           },
@@ -104,10 +107,12 @@ class _SwipeableFilmsWidgetState extends State<SwipeableFilmsWidget>
 }
 
 class MovieItem extends StatelessWidget {
-  Movies movie;
+  Data movie;
   double scale;
   MovieBLoc _movieBLoc;
+
   MovieItem({@required this.movie, this.scale});
+
   BuildContext context;
 
   @override
@@ -118,13 +123,13 @@ class MovieItem extends StatelessWidget {
       create: (context) => _movieBLoc,
       child: BlocBuilder<MovieBLoc, MovieState>(
         builder: (context, movieState) {
-          return _itemPageView(scale, movie);
+          return _layout(scale, movie);
         },
       ),
     );
   }
 
-  Widget _itemPageView(double scale, Movies movie) {
+  Widget _layout(double scale, Data movie) {
     return LayoutBuilder(
       builder: (context, constraint) {
         print('Height: ' + constraint.maxHeight.toString());
@@ -142,7 +147,7 @@ class MovieItem extends StatelessWidget {
     );
   }
 
-  Widget _movieInfo(BoxConstraints constraint, double scale, Movies movie) {
+  Widget _movieInfo(BoxConstraints constraint, double scale, Data movie) {
     return Container(
       width: double.infinity,
       height: ((constraint.maxHeight / 100) * 65) / scale,
@@ -190,11 +195,11 @@ class MovieItem extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          movie.movieLenght + ', ',
+                          movie.movieLeng + ', ',
                           style: TextStyle(color: Colors.white, fontSize: 13),
                         ),
                         Text(
-                          movie.movieRelease,
+                          movie.movieRele,
                           style: TextStyle(color: Colors.white, fontSize: 13),
                         )
                       ],
@@ -246,18 +251,20 @@ class MovieItem extends StatelessWidget {
     );
   }
 
-  Widget _movieBackground(
-      BoxConstraints constraint, double scale, Movies movie) {
+  Widget _movieBackground(BoxConstraints constraint, double scale, Data movie) {
     return Container(
         width: double.infinity,
         height: ((constraint.maxHeight / 100) * 65) / scale,
         margin: EdgeInsets.only(left: 15, right: 15),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  movie.moviePoster,
-                ),
-                fit: BoxFit.cover),
-            borderRadius: BorderRadius.all(Radius.circular(10))));
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          child: CachedNetworkImage(
+            filterQuality: FilterQuality.none,
+            imageUrl: movie.moviePoster,
+            fit: BoxFit.cover,
+          ),
+        ));
   }
 }

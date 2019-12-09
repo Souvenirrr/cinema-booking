@@ -16,12 +16,12 @@ class _TabLayoutHomeWidgetState extends State<TabLayoutHomeWidget> {
   final List<Widget> _tabs = [
     SwipeableFilmsWidget(tabType: TabType.showing),
     SwipeableFilmsWidget(tabType: TabType.coming),
-    SwipeableFilmsWidget(tabType: TabType.special)
+    //SwipeableFilmsWidget(tabType: TabType.special)
   ];
   List<Tab> _tabTitles = [
     Tab(text: AppString.showing),
     Tab(text: AppString.comming),
-    Tab(text: AppString.special)
+    //Tab(text: AppString.special)
   ];
   @override
   Widget build(BuildContext context) {

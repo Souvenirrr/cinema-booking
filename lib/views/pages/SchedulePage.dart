@@ -45,7 +45,7 @@ class _SchedulePageState extends State<SchedulePage> {
         appBar: AppBar(
           backgroundColor: AppTheme.backgroundColor,
           elevation: 0,
-          title: Text(pageScheduleArgs.movieDetail.movieName),
+          title: Text(pageScheduleArgs.movieDetail.data.movieName),
         ),
         backgroundColor: AppTheme.backgroundColor,
         body: BlocProvider<ScheduleBloc>(

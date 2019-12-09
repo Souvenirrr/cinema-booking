@@ -1,17 +1,17 @@
 class MovieModel {
   String status;
   String msg;
-  List<Movies> movies;
+  List<Data> data;
 
-  MovieModel({this.status, this.msg, this.movies});
+  MovieModel({this.status, this.msg, this.data});
 
   MovieModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     msg = json['msg'];
-    if (json['movies'] != null) {
-      movies = new List<Movies>();
-      json['movies'].forEach((v) {
-        movies.add(new Movies.fromJson(v));
+    if (json['data'] != null) {
+      data = new List<Data>();
+      json['data'].forEach((v) {
+        data.add(new Data.fromJson(v));
       });
     }
   }
@@ -20,44 +20,47 @@ class MovieModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['msg'] = this.msg;
-    if (this.movies != null) {
-      data['movies'] = this.movies.map((v) => v.toJson()).toList();
+    if (this.data != null) {
+      data['data'] = this.data.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Movies {
-  String movieId;
+class Data {
+  int movieId;
   String movieName;
-  String movieDescription;
+  String movieDesc;
+  String movieTrailer;
   String movieCens;
-  String movieGenres;
-  String movieRelease;
-  String movieLenght;
-  String movieFormat;
+  String movieGenr;
+  String movieRele;
+  String movieLeng;
+  String movieForm;
   String moviePoster;
 
-  Movies(
+  Data(
       {this.movieId,
       this.movieName,
-      this.movieDescription,
+      this.movieDesc,
+      this.movieTrailer,
       this.movieCens,
-      this.movieGenres,
-      this.movieRelease,
-      this.movieLenght,
-      this.movieFormat,
+      this.movieGenr,
+      this.movieRele,
+      this.movieLeng,
+      this.movieForm,
       this.moviePoster});
 
-  Movies.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     movieId = json['movie_id'];
     movieName = json['movie_name'];
-    movieDescription = json['movie_description'];
+    movieDesc = json['movie_desc'];
+    movieTrailer = json['movie_trailer'];
     movieCens = json['movie_cens'];
-    movieGenres = json['movie_genres'];
-    movieRelease = json['movie_release'];
-    movieLenght = json['movie_lenght'];
-    movieFormat = json['movie_format'];
+    movieGenr = json['movie_genr'];
+    movieRele = json['movie_rele'];
+    movieLeng = json['movie_leng'];
+    movieForm = json['movie_form'];
     moviePoster = json['movie_poster'];
   }
 
@@ -65,12 +68,13 @@ class Movies {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['movie_id'] = this.movieId;
     data['movie_name'] = this.movieName;
-    data['movie_description'] = this.movieDescription;
+    data['movie_desc'] = this.movieDesc;
+    data['movie_trailer'] = this.movieTrailer;
     data['movie_cens'] = this.movieCens;
-    data['movie_genres'] = this.movieGenres;
-    data['movie_release'] = this.movieRelease;
-    data['movie_lenght'] = this.movieLenght;
-    data['movie_format'] = this.movieFormat;
+    data['movie_genr'] = this.movieGenr;
+    data['movie_rele'] = this.movieRele;
+    data['movie_leng'] = this.movieLeng;
+    data['movie_form'] = this.movieForm;
     data['movie_poster'] = this.moviePoster;
     return data;
   }

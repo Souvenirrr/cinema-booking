@@ -19,8 +19,11 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
   Stream<WalletState> mapEventToState(WalletEvent event) async* {
     // TODO: implement mapEventToState
     if (event is WalletLoadStarted) {
-      final AccountModel wallet = await accountRepository.fetch();
-      yield WalletLoaded(wallet: wallet);
+      final AccountModel wallet = await accountRepository.info();
+      if (wallet != null)
+        yield WalletLoaded(wallet: wallet);
+      else
+        yield WalletFailure(msg: 'Error');
     }
   }
 }

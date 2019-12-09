@@ -61,13 +61,17 @@ class _SlideHomePageWidgetState extends State<SlideHomePageWidget> {
             });
             _autoSwipe();
 
-            return PageView(
-                controller: _pageController,
-                onPageChanged: (pageIndex) {
-                  _currentPage = pageIndex;
-                  _autoSwipe();
-                },
-                children: _slides);
+            return PageView.builder(
+              itemCount: _slides.length,
+              controller: _pageController,
+              onPageChanged: (pageIndex) {
+                _currentPage = pageIndex;
+                _autoSwipe();
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return _slides[index];
+              },
+            );
           }
           return LoadingWidget();
         },

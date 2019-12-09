@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cgv_clone/navigate/GenarateRouter.dart';
 import 'package:cgv_clone/views/Theme.dart';
+import 'package:cgv_clone/views/pages/HomePage.dart';
 import 'package:flutter/material.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -34,9 +35,11 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Cinema booking',
       onGenerateRoute: (settings) {
-        return GenarateRouter.settings(settings);
+        return GenerateRouter.settings(settings);
       },
-      routes: Routers.define,
+      routes: {
+        RouterNames.home: (context) => HomePage()
+      },
       theme: ThemeData(accentColor: AppTheme.surfaceColor),
     );
   }

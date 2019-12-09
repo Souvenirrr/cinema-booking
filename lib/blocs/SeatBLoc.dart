@@ -20,11 +20,13 @@ class SeatBloc extends Bloc<SeatEvent, SeatState> {
       yield SeatLoading();
       final SeatModel seats =
           await seatRepository.fetchBySchedule(event.scheduleID);
-      yield SeatsLoaded(seats: seats);
+      if (seats != null)
+        yield SeatsLoaded(seats: seats);
+      else
+        yield SeatLoadFailure(msg: 'Error');
     }
     if (event is SeatPressed) {
-      yield SeatSelected(
-          selectedSeats: event.selectedSeats);
+      yield SeatSelected(selectedSeats: event.selectedSeats);
     }
   }
 }

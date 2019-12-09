@@ -29,3 +29,8 @@ class SeatsLoaded extends SeatState {
   // TODO: implement props
   List<Object> get props => [seats];
 }
+
+class SeatLoadFailure extends SeatState{
+  final String msg;
+  SeatLoadFailure({@required this.msg});
+}

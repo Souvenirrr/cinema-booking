@@ -1,59 +1,75 @@
 class MovieDetailModel {
   String status;
-  String mgs;
-  String movieId;
-  String movieTrailerYtbId;
-  String movieName;
-  String movieDescription;
-  String movieCens;
-  String movieGenres;
-  String movieRelease;
-  String movieLenght;
-  String movieFormat;
-  String moviePoster;
+  String msg;
+  Data data;
 
-  MovieDetailModel(
-      {this.status,
-      this.mgs,
-      this.movieId,
-      this.movieTrailerYtbId,
-      this.movieName,
-      this.movieDescription,
-      this.movieCens,
-      this.movieGenres,
-      this.movieRelease,
-      this.movieLenght,
-      this.movieFormat,
-      this.moviePoster});
+  MovieDetailModel({this.status, this.msg, this.data});
 
   MovieDetailModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    mgs = json['mgs'];
-    movieId = json['movie_id'];
-    movieTrailerYtbId = json['movie_trailer_ytb_id'];
-    movieName = json['movie_name'];
-    movieDescription = json['movie_description'];
-    movieCens = json['movie_cens'];
-    movieGenres = json['movie_genres'];
-    movieRelease = json['movie_release'];
-    movieLenght = json['movie_lenght'];
-    movieFormat = json['movie_format'];
-    moviePoster = json['movie_poster'];
+    msg = json['msg'];
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    data['mgs'] = this.mgs;
+    data['msg'] = this.msg;
+    if (this.data != null) {
+      data['data'] = this.data.toJson();
+    }
+    return data;
+  }
+}
+
+class Data {
+  int movieId;
+  String movieName;
+  String movieDesc;
+  String movieTrailer;
+  String movieCens;
+  String movieGenr;
+  String movieRele;
+  String movieLeng;
+  String movieForm;
+  String moviePoster;
+
+  Data(
+      {this.movieId,
+      this.movieName,
+      this.movieDesc,
+      this.movieTrailer,
+      this.movieCens,
+      this.movieGenr,
+      this.movieRele,
+      this.movieLeng,
+      this.movieForm,
+      this.moviePoster});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    movieId = json['movie_id'];
+    movieName = json['movie_name'];
+    movieDesc = json['movie_desc'];
+    movieTrailer = json['movie_trailer'];
+    movieCens = json['movie_cens'];
+    movieGenr = json['movie_genr'];
+    movieRele = json['movie_rele'];
+    movieLeng = json['movie_leng'];
+    movieForm = json['movie_form'];
+    moviePoster = json['movie_poster'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['movie_id'] = this.movieId;
-    data['movie_trailer_ytb_id'] = this.movieTrailerYtbId;
     data['movie_name'] = this.movieName;
-    data['movie_description'] = this.movieDescription;
+    data['movie_desc'] = this.movieDesc;
+    data['movie_trailer'] = this.movieTrailer;
     data['movie_cens'] = this.movieCens;
-    data['movie_genres'] = this.movieGenres;
-    data['movie_release'] = this.movieRelease;
-    data['movie_lenght'] = this.movieLenght;
-    data['movie_format'] = this.movieFormat;
+    data['movie_genr'] = this.movieGenr;
+    data['movie_rele'] = this.movieRele;
+    data['movie_leng'] = this.movieLeng;
+    data['movie_form'] = this.movieForm;
     data['movie_poster'] = this.moviePoster;
     return data;
   }
