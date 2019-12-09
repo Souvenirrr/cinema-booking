@@ -202,7 +202,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         style: TextStyle(
                                             color: AppTheme.onSurface),
                                         maxLines: 1,
-                                        keyboardType: TextInputType.emailAddress,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
                                           hintText: AppString.email,
@@ -246,11 +247,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       TextField(
                                         controller: _passportNumberCtl,
                                         focusNode: _passportNumberFocus,
-                                        textInputAction: TextInputAction.next,
-                                        onSubmitted: (_) {
-                                          FocusScope.of(context)
-                                              .requestFocus(_passwordFocus);
-                                        },
+                                        textInputAction: TextInputAction.done,
                                         keyboardType: TextInputType.number,
                                         style: TextStyle(
                                             color: AppTheme.onSurface),
