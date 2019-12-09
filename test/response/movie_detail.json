@@ -1,14 +1,16 @@
 {
-    "status": "success",
-    "mgs": "done",
-    "movie_id": "fam01",
-    "movie_trailer_ytb_url": "bwzLiQZDw2I",
-    "movie_name": "Nữ hoàng băng giá 2019 (Phần 2)",
-    "movie_description": "Cùng dấn thân vào một cuộc phiêu lưu xa xôi thú vị, hai chị em Anna và Elsa đi đến chốn rừng sâu để tìm kiếm sự thật về bí ẩn cổ xưa của vương quốc mình. Tất cả những gì Anna & Elsa biết về bản thân, lịch sử và gia đình của họ đều bị thử thách khi họ bị cuốn vào một chuyến đi đầy quả cảm đến với vùng đất phía bắc bí ẩn ngoài Arendelle được báo trước.",
+  "status": "OK",
+  "msg": "sucess",
+  "data": {
+    "movie_id": 1,
+    "movie_name": "FROZEN 2-NỮ HOÀNG BĂNG GIÁ 2",
+    "movie_desc": "Frozen lấy cảm hứng từ câu chuyện Nữ Hoàng Tuyết được nhà văn Andersen chắp bút nhưng nội dung hoàn toàn khác so với tác phẩm gốc. Phim tạo nên cơn sốt hơn 1,2 tỷ $ trên toàn thế giới vào năm 2013. Sau 6 năm, bộ phim ra mắt phần 2 trong sự chờ đợi tột cùng của khán giả.\r\n\r\nElsa, Anna, Kristoff và Olaf đi sâu vào rừng để tìm hiểu sự thật về bí ẩn xảy ra nơi vương quốc của họ. Đó là khu rừng thần bí mà hoàng hậu đã từng kể cho hai nàng công chúa khi còn nhỏ. Liệu điều này có liên quan gì đến sức mạnh của Elsa. Điều gì đang chờ đợi họ khi vén màn sự thật?",
+    "movie_trailer": "C70I39Pqlhs",
     "movie_cens": "P",
-    "movie_genres": "Hài, Hoạt Hình, Phiêu Lưu",
-    "movie_release": "22/11/2019",
-    "movie_lenght": "103 phút",
-    "movie_format": "2D",
-    "movie_poster": "https://images-na.ssl-images-amazon.com/images/I/91D1DDCMmQL._SY741_.jpg"
+    "movie_genr": "Hài Hước, Hoạt hình",
+    "movie_rele": "2019-11-20",
+    "movie_leng": "01:45:00",
+    "movie_form": "2D, 3D",
+    "movie_poster": "https://m.media-amazon.com/images/M/MV5BMjA0YjYyZGMtN2U0Ni00YmY4LWJkZTItYTMyMjY3NGYyMTJkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_UX182_CR0,0,182,268_AL_.jpg"
+  }
 }
