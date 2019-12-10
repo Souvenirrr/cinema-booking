@@ -28,21 +28,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final AccountModel accountModel =
           await accountRepository.login(event.username, event.password);
       if (accountModel != null) {
-        if (event.username == 'minhduc' && event.password == '1234') {
-          if (accountModel.status == 'ok') {
-            if (await authenticateRepository.saveToken(accountModel.token)) {
-              //yield LoginSuccess();
-              Navigator.of(event.context).pop();
+        if (event.username.trim().isNotEmpty &&
+            event.password.trim().isNotEmpty) {
+          if (event.username == 'minhduc' && event.password == '1234') {
+            if (accountModel.status == 'ok') {
+              if (await authenticateRepository.saveToken(accountModel.token)) {
+                //yield LoginSuccess();
+                Navigator.of(event.context).pop();
+              } else
+                yield LoginFailure(msg: AppString.saveTokenError);
             } else
-              yield LoginFailure(msg: AppString.loiluutoken);
-          } else
-            yield LoginFailure(msg: AppString.saitaikhoan);
-        } else {
-          await Future.delayed(Duration(seconds: 2));
-          yield LoginFailure(msg: AppString.saitaikhoan);
-        }
-      } else
-        yield LoginFailure(msg: AppString.loiconnect);
+              yield LoginFailure(msg: AppString.accountNotExist);
+          } else {
+            await Future.delayed(Duration(seconds: 2));
+            yield LoginFailure(msg: AppString.accountNotExist);
+          }
+        } else
+          yield LoginFailure(msg: AppString.pleaseFitForm);
+      } else {
+        yield LoginFailure(msg: AppString.connectError);
+      }
     }
   }
 }
