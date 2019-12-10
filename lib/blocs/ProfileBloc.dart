@@ -34,7 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         else
           yield ProfileFailure(msg: AppString.someWrong);
       } else
-        yield ProfileFailure(msg: AppString.loiconnect);
+        yield ProfileFailure(msg: AppString.connectError);
     }
     if (event is LogoutButtonPressed) {
       yield LogoutLoading();
@@ -49,7 +49,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         } else
           yield LogoutFailure(msg: AppString.someWrong);
       } else
-        yield LogoutFailure(msg: AppString.loiconnect);
+        yield LogoutFailure(msg: AppString.connectError);
     }
   }
 }
