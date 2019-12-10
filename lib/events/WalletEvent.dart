@@ -1,4 +1,3 @@
-import 'package:cgv_clone/models/SeatModel.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

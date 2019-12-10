@@ -595,6 +595,7 @@ class _PayableState extends State<Payable> {
   _showDialog(DialogType dialogType, args) {
     showDialog(
         context: context,
+        // ignore: missing_return
         builder: (context) {
           if (dialogType == DialogType.confirm) return _confirm(args);
           if (dialogType == DialogType.success) return _success(args);

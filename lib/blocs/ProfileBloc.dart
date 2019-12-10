@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cgv_clone/events/HomeEvent.dart';
 import 'package:cgv_clone/events/ProfileEvent.dart';
 import 'package:cgv_clone/models/AccountModel.dart';
 import 'package:cgv_clone/models/LogoutModel.dart';

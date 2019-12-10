@@ -5,7 +5,6 @@ import 'package:cgv_clone/navigate/GenarateRouter.dart';
 import 'package:cgv_clone/repsitories/AuthenticateRepository.dart';
 import 'package:cgv_clone/repsitories/PayRepository.dart';
 import 'package:cgv_clone/states/PayState.dart';
-import 'package:cgv_clone/states/TabState.dart';
 import 'package:cgv_clone/string/AppString.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';

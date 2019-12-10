@@ -47,7 +47,9 @@ class _HomePageState extends State<HomePage>
             ),
             BlocProvider<SlideBloc>(
               create: (context) =>
-                  SlideBloc(slideRepository: SlideRepository()),
+                  SlideBloc(slideRepository: SlideRepository(
+
+                  )),
             ),
             BlocProvider<TabBloc>(
               create: (context) => TabBloc(movieRepository: MovieRepository()),
