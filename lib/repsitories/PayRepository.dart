@@ -5,8 +5,8 @@ import 'package:cgv_clone/navigate/Endpoint.dart';
 import 'package:dio/dio.dart';
 
 class PayRepository {
-  Future<PaymentModel> pay(
-      String scheduleID, double point, List<String> seatIDs) async {
+  Future<PaymentModel> pay(String scheduleID, double point,
+      List<String> seatIDs, String token) async {
     try {
       Response response =
           await Dio().get(Endpoint.payment(scheduleID, seatIDs, point));

@@ -15,9 +15,9 @@ class AuthenticateRepository {
   }
 
   Future<bool> isExpired() async {
-    bool result = true;
+    bool result = false;
     await Future.delayed(Duration(seconds: 1));
-    return result == null ? false : result;
+    return result;
   }
 
   Future readToken() async {

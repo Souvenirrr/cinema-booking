@@ -11,6 +11,7 @@ import 'package:cgv_clone/models/MovieDetailModel.dart';
 import 'package:cgv_clone/models/PageSeatArgs.dart';
 import 'package:cgv_clone/models/SeatModel.dart';
 import 'package:cgv_clone/repsitories/AccountRepository.dart';
+import 'package:cgv_clone/repsitories/AuthenticateRepository.dart';
 import 'package:cgv_clone/repsitories/PayRepository.dart';
 import 'package:cgv_clone/repsitories/SeatRepository.dart';
 import 'package:cgv_clone/states/CartState.dart';
@@ -72,7 +73,9 @@ class _SeatPageState extends State<SeatPage> {
     _seatBloc = SeatBloc(seatRepository: SeatRepository());
     _walletBloc = WalletBloc(accountRepository: AccountRepository());
     _cartBloc = CartBloc();
-    _payBloc = PayBloc(payRepository: PayRepository());
+    _payBloc = PayBloc(
+        payRepository: PayRepository(),
+        authenticateRepository: AuthenticateRepository());
 
     _walletBloc.add(WalletLoadStarted());
     _seatBloc.add(SeatLoadStarted(scheduleID: pageSeatArgs.time.scheduleID));
@@ -570,7 +573,8 @@ class _PayableState extends State<Payable> {
               });
             } else {
               print('Khong du so du');
-              _showDialog(DialogType.error, {'title': AppString.notEnoughMoney});
+              _showDialog(
+                  DialogType.error, {'title': AppString.notEnoughMoney});
             }
           }
         },
@@ -607,8 +611,7 @@ class _PayableState extends State<Payable> {
         builder: (context, payState) {
           if (payState is Payed) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              _showDialog(
-                  DialogType.success, {'title': AppString.paySuccess});
+              _showDialog(DialogType.success, {'title': AppString.paySuccess});
             });
           }
           return Text(args['content']);
@@ -631,7 +634,8 @@ class _PayableState extends State<Payable> {
             _payBloc.add(ConfirmButtonPressed(
                 point: args['point'],
                 scheduleID: args['scheduleID'],
-                selectedSeats: args['selectedSeats']));
+                selectedSeats: args['selectedSeats'],
+                context: context));
           },
           child: Text(args['action_2']),
         ),
