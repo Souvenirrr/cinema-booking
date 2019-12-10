@@ -91,7 +91,7 @@ class _SeatPageState extends State<SeatPage> {
       appBar: AppBar(
         backgroundColor: AppTheme.backgroundColor,
         elevation: 0,
-        title: Text(AppString.chongoi),
+        title: Text(AppString.cost),
       ),
       body: Container(
         child: Column(
@@ -134,7 +134,7 @@ class _SeatPageState extends State<SeatPage> {
             color: AppTheme.surfaceColor,
             borderRadius: BorderRadius.all(Radius.circular(55))),
         child: Text(
-          AppString.manhinh,
+          AppString.bigScreen,
           style:
               TextStyle(color: AppTheme.onSurface, fontWeight: FontWeight.w500),
         ),
@@ -367,12 +367,12 @@ class _PayableState extends State<Payable> {
                           selectedSeats != null
                       ? seatLength.toString() +
                           ' ' +
-                          AppString.ghe +
+                          AppString.movieChair +
                           ': ' +
                           AppString.formatCurrency.format(totalPriceWithPoint) +
                           ' ' +
                           AppString.vnd
-                      : '0 ' + AppString.ghe + ': 0 ' + AppString.vnd,
+                      : '0 ' + AppString.movieChair + ': 0 ' + AppString.vnd,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
@@ -473,7 +473,7 @@ class _PayableState extends State<Payable> {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          AppString.sodu +
+          AppString.walletMoney +
               '\n' +
               (wallet != null
                   ? AppString.formatCurrency
@@ -556,21 +556,21 @@ class _PayableState extends State<Payable> {
           if (state is CartLoaded && state.selectedSeats.keys.length > 0) {
             if (state.totalPriceWithPoint < double.parse(wallet.info.money)) {
               _showDialog(DialogType.confirm, {
-                'title': AppString.xacnhanthanhtoan,
-                'content': AppString.muave(
+                'title': AppString.payConfirm,
+                'content': AppString.dialogTicket(
                     AppString.formatCurrency
                         .format(state.totalPriceWithPoint)
                         .toString(),
                     state.selectedSeats.keys.length),
-                'action_1': AppString.huy,
-                'action_2': AppString.thanhtoan,
+                'action_1': AppString.cancel,
+                'action_2': AppString.pay,
                 'point': _pointUsed,
                 'scheduleID': pageSeatArgs.time.scheduleID,
                 'selectedSeats': state.selectedSeats
               });
             } else {
               print('Khong du so du');
-              _showDialog(DialogType.error, {'title': AppString.khongdusodu});
+              _showDialog(DialogType.error, {'title': AppString.notEnoughMoney});
             }
           }
         },
@@ -580,7 +580,7 @@ class _PayableState extends State<Payable> {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            AppString.thanhtoan,
+            AppString.pay,
             style: TextStyle(color: AppTheme.onSurface),
           ),
         ),
@@ -608,7 +608,7 @@ class _PayableState extends State<Payable> {
           if (payState is Payed) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               _showDialog(
-                  DialogType.success, {'title': AppString.thanhtoanthanhcong});
+                  DialogType.success, {'title': AppString.paySuccess});
             });
           }
           return Text(args['content']);
@@ -627,7 +627,7 @@ class _PayableState extends State<Payable> {
         FlatButton(
           onPressed: () {
             //Navigator.pop(context);
-            _showDialog(DialogType.loading, {'title': AppString.vuilongdoi});
+            _showDialog(DialogType.loading, {'title': AppString.pleaseWait});
             _payBloc.add(ConfirmButtonPressed(
                 point: args['point'],
                 scheduleID: args['scheduleID'],
