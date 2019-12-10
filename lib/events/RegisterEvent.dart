@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 class RegisterEvent extends Equatable {
@@ -8,16 +9,17 @@ class RegisterEvent extends Equatable {
 }
 
 class RegisterButtonPress extends RegisterEvent {
+  final BuildContext context;
   final String username, phone, email, sex, birthday, password, repassword, cmt;
 
-  RegisterButtonPress({
-    @required this.username,
-    @required this.phone,
-    @required this.cmt,
-    @required this.email,
-    @required this.sex,
-    @required this.birthday,
-    @required this.password,
-    @required this.repassword,
-  });
+  RegisterButtonPress(
+      {@required this.username,
+      @required this.phone,
+      @required this.cmt,
+      @required this.email,
+      @required this.sex,
+      @required this.birthday,
+      @required this.password,
+      @required this.repassword,
+      @required this.context});
 }
