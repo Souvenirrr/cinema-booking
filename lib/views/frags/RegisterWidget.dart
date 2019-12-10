@@ -6,6 +6,7 @@ import 'package:cgv_clone/states/RegisterState.dart';
 import 'package:cgv_clone/string/AppString.dart';
 import 'package:cgv_clone/views/Theme.dart';
 import 'package:cgv_clone/views/frags/LoadingWidget.dart';
+import 'package:cgv_clone/views/frags/SnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +69,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     return BlocProvider<RegisterBloc>(
       create: (context) => _registerBloc,
       child: BlocListener<RegisterBloc, RegisterState>(
-        listener: (context, registerState) {},
+        listener: (context, registerState) {
+          if (registerState is RegisterFailure) {
+            Scaffold.of(context).showSnackBar(snackBar(registerState.msg));
+          }
+        },
         child: BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, registerState) {
             return Stack(
@@ -335,9 +340,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                     repassword: _reTypePasswordCtl.text,
                                     password: _passwordCtl.text,
                                     username: _usernameCtl.text,
-                                    sex: null,
+                                    sex: sex,
                                     email: _emailCtl.text,
                                     cmt: _passportNumberCtl.text,
+                                    context: context,
                                   ));
                                 },
                                 color: AppTheme.surfaceColor,
